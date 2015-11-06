@@ -102,9 +102,9 @@ public class MailMarkSession {
 			System.out.println("Contacting UkMail...");
 						
 			Object response = soap.itemManifest1(batch , new Holder<Header>(header)); // new Holder<Header>() THIS
-			
-			Node node = (Node) response;
-			responseString = node.getFirstChild().getNodeValue();
+			System.out.println(response);
+			//Node node = (Node) response;
+			responseString = (String) response;//node.getFirstChild().getNodeValue();
 
 			success = responseString.equalsIgnoreCase("success");
 		} 

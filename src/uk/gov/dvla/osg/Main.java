@@ -24,8 +24,8 @@ public class Main {
 			logFile=filename + ".LOG";
 			errFile=filename + ".ERR.LOG";
 		}
-		System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(logFile))));
-		System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream(errFile))));
+		//System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(logFile))));
+		//System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream(errFile))));
 		FileHandler fh = new FileHandler(filename);
 		
 		//split requests into 1000s and send request
