@@ -30,7 +30,7 @@ public class Soapui
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://sandbox.mailmark.ukmail.com/sst/item_manifest-1.java?WSDL");
+            url = new URL("https://sandbox.mailmark.ukmail.com/sst/item_manifest-1?WSDL");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
