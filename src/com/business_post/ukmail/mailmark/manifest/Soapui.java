@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "soapui", targetNamespace = "http://ukmail.business-post.com/mailmark/manifest", wsdlLocation = "https://sandbox.mailmark.ukmail.com/sst/item_manifest-1.java?WSDL")
+@WebServiceClient(name = "soapui", targetNamespace = "http://ukmail.business-post.com/mailmark/manifest", wsdlLocation = "https://mailmark.ukmail.com/sst/item_manifest-1.java?WSDL")// "https://sandbox.mailmark.ukmail.com/sst/item_manifest-1.java?WSDL")
 public class Soapui
     extends Service
 {
@@ -30,7 +30,7 @@ public class Soapui
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://sandbox.mailmark.ukmail.com/sst/item_manifest-1?WSDL");
+            url = new URL("https://mailmark.ukmail.com/sst/item_manifest-1?WSDL");//"https://sandbox.mailmark.ukmail.com/sst/item_manifest-1?WSDL");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

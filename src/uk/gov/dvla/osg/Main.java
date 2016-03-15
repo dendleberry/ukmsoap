@@ -16,9 +16,9 @@ public class Main {
 		String errFile;
 		if(args.length != 1){
 			System.out.println("INCORRECT NUMBER OF ARGUMENTS");
-			filename="C:\\Users\\dendlel\\Desktop\\1509345000.SOAPFILE.DATA";
-			logFile="C:\\Users\\dendlel\\Desktop\\SOAP_LOG.DAT";
-			errFile="C:\\Users\\dendlel\\Desktop\\SOAP_ERR.DAT";
+			filename="C:\\Users\\dendlel\\Desktop\\MMark\\1509345000.SOAPFILE.DATA";
+			logFile="C:\\Users\\dendlel\\Desktop\\MMark\\SOAP_LOG.DAT";
+			errFile="C:\\Users\\dendlel\\Desktop\\MMark\\SOAP_ERR.DAT";
 		}else{
 			filename=args[0];
 			logFile=filename + ".LOG";

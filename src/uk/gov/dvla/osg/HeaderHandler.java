@@ -43,12 +43,12 @@ public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
  
                 SOAPElement username =
                         usernameToken.addChildElement("Username", "wsse");
-                username.addTextNode("DVLAQA");
+                username.addTextNode("DVLAMorriston");//"DVLAQA");
  
                 SOAPElement password =
                         usernameToken.addChildElement("Password", "wsse");
                 password.setAttribute("Type", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText");
-                password.addTextNode("mrcT9S678g");
+                password.addTextNode("W3j74Xn5Y5");//mrcT9S678g");
  
                 //Print out the outbound SOAP message to System.out
                 message.writeTo(System.out);
