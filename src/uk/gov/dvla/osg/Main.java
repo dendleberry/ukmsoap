@@ -1,5 +1,6 @@
 package uk.gov.dvla.osg;
 
+
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -16,20 +17,26 @@ public class Main {
 		String errFile;
 		if(args.length != 1){
 			System.out.println("INCORRECT NUMBER OF ARGUMENTS");
-			filename="C:\\Users\\dendlel\\Desktop\\MMark\\1509345000.SOAPFILE.DATA";
-			logFile="C:\\Users\\dendlel\\Desktop\\MMark\\SOAP_LOG.DAT";
-			errFile="C:\\Users\\dendlel\\Desktop\\MMark\\SOAP_ERR.DAT";
+			//filename="C:\\Users\\dendlel\\Desktop\\MMark\\1509345000.SOAPFILE.DATA";
+			filename="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\1378172000.SOAPFILE.DATA";
+			logFile="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\SOAP_LOG.DAT";
+			errFile="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\SOAP_ERR.DAT";
 		}else{
 			filename=args[0];
 			logFile=filename + ".LOG";
 			errFile=filename + ".ERR.LOG";
 		}
-		//System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(logFile))));
-		//System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream(errFile))));
+		
+		PrintStream log = new PrintStream(new BufferedOutputStream(new FileOutputStream(logFile)));
+		PrintStream err = new PrintStream(new BufferedOutputStream(new FileOutputStream(errFile)));
+		
+		System.setOut(log);
+		System.setErr(err);
 		FileHandler fh = new FileHandler(filename);
 		
 		//split requests into 1000s and send request
 		Integer count = 0;
+		Integer totalCount = 0;
 		ArrayList<OutgoingItems> allItems = new ArrayList<OutgoingItems>();
 		ArrayList<OutgoingItems> thosandList = new ArrayList<OutgoingItems>();
 		
@@ -38,20 +45,16 @@ public class Main {
 		for(OutgoingItems items : allItems){
 			thosandList.add(items);
 			count ++;
-			if(count == 1000){
+			totalCount ++;
+			//send when we have 1000 customers in the list
+			if(count == 1000 || count == allItems.size() || totalCount == allItems.size()){
 				sendRequest(items.getScid(), items.getAppName(), items.getBatchRef(), thosandList);
 				thosandList.clear();
 				count = 0;
-			}else{
-				if(count==allItems.size()){
-					sendRequest(items.getScid(), items.getAppName(), items.getBatchRef(), thosandList);
-					thosandList.clear();
-					count = 0;
-				}
 			}
 		}
-		
-		//sendRequest("1000446","TEST","DVLATEST2",fh.getOutGoingItems());
+		log.flush();
+		err.flush();
 	}
 
 	public static void sendRequest(String scid, String application, String batchRef, ArrayList<OutgoingItems> outgoingItems) throws Exception{

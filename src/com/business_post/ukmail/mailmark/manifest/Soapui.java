@@ -17,11 +17,11 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "soapui", targetNamespace = "http://ukmail.business-post.com/mailmark/manifest", wsdlLocation = "https://mailmark.ukmail.com/sst/item_manifest-1.java?WSDL")// "https://sandbox.mailmark.ukmail.com/sst/item_manifest-1.java?WSDL")
+@WebServiceClient(name = "soapui", targetNamespace = "http://ukmail.business-post.com/mailmark/manifest", wsdlLocation = "https://mailmark.ukmail.com/sst/item_manifest-1.java?WSDL")//   https://sandbox.mailmark.ukmail.com/sst/item_manifest-1.java?WSDL
 public class Soapui
     extends Service
 {
-
+	
     private final static URL SOAPUI_WSDL_LOCATION;
     private final static WebServiceException SOAPUI_EXCEPTION;
     private final static QName SOAPUI_QNAME = new QName("http://ukmail.business-post.com/mailmark/manifest", "soapui");
@@ -30,7 +30,7 @@ public class Soapui
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://mailmark.ukmail.com/sst/item_manifest-1?WSDL");//"https://sandbox.mailmark.ukmail.com/sst/item_manifest-1?WSDL");
+            url = new URL("https://mailmark.ukmail.com/sst/item_manifest-1?WSDL");// https://sandbox.mailmark.ukmail.com/sst/item_manifest-1?WSDL
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -67,9 +67,9 @@ public class Soapui
      * @return
      *     returns MailmarkOnrampPortType
      */
-    @WebEndpoint(name = "item_manifest-1.binding.soap")
+    @WebEndpoint(name = "item_manifest-1.2.binding.soap")
     public MailmarkOnrampPortType getItemManifest1BindingSoap() {
-        return super.getPort(new QName("http://ukmail.business-post.com/mailmark/manifest", "item_manifest-1.binding.soap"), MailmarkOnrampPortType.class);
+        return super.getPort(new QName("http://ukmail.business-post.com/mailmark/manifest", "item_manifest-1.2.binding.soap"), MailmarkOnrampPortType.class);
     }
 
     /**
@@ -79,9 +79,9 @@ public class Soapui
      * @return
      *     returns MailmarkOnrampPortType
      */
-    @WebEndpoint(name = "item_manifest-1.binding.soap")
+    @WebEndpoint(name = "item_manifest-1.2.binding.soap")
     public MailmarkOnrampPortType getItemManifest1BindingSoap(WebServiceFeature... features) {
-        return super.getPort(new QName("http://ukmail.business-post.com/mailmark/manifest", "item_manifest-1.binding.soap"), MailmarkOnrampPortType.class, features);
+        return super.getPort(new QName("http://ukmail.business-post.com/mailmark/manifest", "item_manifest-1.2.binding.soap"), MailmarkOnrampPortType.class, features);
     }
 
     private static URL __getWsdlLocation() {
