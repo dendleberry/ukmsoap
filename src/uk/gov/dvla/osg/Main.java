@@ -17,15 +17,13 @@ public class Main {
 		String errFile;
 		if(args.length != 1){
 			System.out.println("INCORRECT NUMBER OF ARGUMENTS");
-			//filename="C:\\Users\\dendlel\\Desktop\\MMark\\1509345000.SOAPFILE.DATA";
-			filename="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\1378172000.SOAPFILE.DATA";
-			logFile="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\SOAP_LOG.DAT";
-			errFile="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\SOAP_ERR.DAT";
+			filename="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\1382150000.SOAPFILE.DATA";
 		}else{
 			filename=args[0];
-			logFile=filename + ".LOG";
-			errFile=filename + ".ERR.LOG";
 		}
+		
+		logFile=filename + ".LOG";
+		errFile=filename + ".ERR.LOG";
 		
 		PrintStream log = new PrintStream(new BufferedOutputStream(new FileOutputStream(logFile)));
 		PrintStream err = new PrintStream(new BufferedOutputStream(new FileOutputStream(errFile)));
@@ -86,6 +84,8 @@ public class Main {
 		
 		if(success){
 			System.out.println("SUCCESS");
+		}else{
+			System.out.println("ERROR");
 		}
 		
 	}
