@@ -2,6 +2,7 @@ package uk.gov.dvla.osg;
 
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -10,16 +11,26 @@ import com.business_post.ukmail.mailmark.manifest.Item;
 import com.business_post.ukmail.mailmark.manifest.ObjectFactory;
 
 public class Main {
+	static String propFile;
 	
 	public static void main(String[] args) throws Exception {
 		String filename;
 		String logFile;
 		String errFile;
-		if(args.length != 1){
+		
+		if(args.length != 2){
 			System.out.println("INCORRECT NUMBER OF ARGUMENTS");
+			System.out.println("1) SOAPFILE path, 2) Props file");
 			filename="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\1382150000.SOAPFILE.DATA";
+			propFile="C:\\Users\\dendlel\\Desktop\\LIVE_SOAP\\props.dat";
 		}else{
 			filename=args[0];
+			propFile=args[1];
+		}
+		
+		if( !(new File(propFile).exists()) ){
+			System.out.println("Props file '" + propFile + "' doesn't exist!");
+			System.exit(1);
 		}
 		
 		logFile=filename + ".LOG";
@@ -57,7 +68,7 @@ public class Main {
 
 	public static void sendRequest(String scid, String application, String batchRef, ArrayList<OutgoingItems> outgoingItems) throws Exception{
 		
-		MailMarkSession session = new MailMarkSession();
+		MailMarkSession session = new MailMarkSession(propFile);
 		session.setApplication(application);
 		session.setBatchReference(batchRef);
 		session.setScid(scid);

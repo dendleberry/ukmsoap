@@ -1,5 +1,6 @@
 package uk.gov.dvla.osg;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.xml.namespace.QName;
@@ -18,8 +19,13 @@ import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 
 public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
-	 
-    @Override
+	Properties props;
+    public HeaderHandler(Properties props) {
+		this.props=props;
+	}
+
+
+	@Override
 	public boolean handleMessage(SOAPMessageContext smc) {
  
         Boolean outboundProperty = (Boolean) smc.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
@@ -43,12 +49,12 @@ public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
  
                 SOAPElement username =
                         usernameToken.addChildElement("Username", "wsse");
-                username.addTextNode("DVLAMorriston");//"DVLAQA");
+                username.addTextNode(props.getProperty("mailmark.username"));
  
                 SOAPElement password =
                         usernameToken.addChildElement("Password", "wsse");
                 password.setAttribute("Type", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText");
-                password.addTextNode("W3j74Xn5Y5");//mrcT9S678g");
+                password.addTextNode(props.getProperty("mailmark.password"));
  
                 //Print out the outbound SOAP message to System.out
                 message.writeTo(System.out);

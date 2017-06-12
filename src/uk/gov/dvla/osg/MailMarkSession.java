@@ -1,16 +1,19 @@
 package uk.gov.dvla.osg;
 
-import java.util.ArrayList; 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Holder;
 import javax.xml.ws.soap.SOAPFaultException;
-
-import org.w3c.dom.Node;
 
 import com.business_post.ukmail.mailmark.manifest.Item;
 import com.business_post.ukmail.mailmark.manifest.Items;
@@ -26,6 +29,7 @@ public class MailMarkSession {
 	private String application;
 	private String scid;
 	public ArrayList<Item> mailItems;
+	private Properties props;
 
 	
 	public String getScid() {
@@ -52,8 +56,21 @@ public class MailMarkSession {
 		this.batchReference = batchReference;
 	}
 		
-	public MailMarkSession(){
+	public MailMarkSession(String propFile){
 		mailItems = new ArrayList<Item>();
+		props = new Properties();
+		
+		InputStream input;
+		try {
+			input = new FileInputStream(propFile);
+			props.load(input);
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+			System.exit(1);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			System.exit(1);
+		}
 	}
 	
 	public boolean commit() throws Exception{
@@ -62,7 +79,7 @@ public class MailMarkSession {
 		
 		Soapui client = new Soapui();
 
-		HeaderHandlerResolver handlerResolver = new HeaderHandlerResolver();
+		HeaderHandlerResolver handlerResolver = new HeaderHandlerResolver(props);
 		client.setHandlerResolver(handlerResolver);
 
 		MailmarkOnrampPortType soap = client.getItemManifest1BindingSoap();
@@ -107,6 +124,7 @@ public class MailMarkSession {
 			responseString = (String) response;//node.getFirstChild().getNodeValue();
 
 			success = responseString.equalsIgnoreCase("success");
+			
 		} 
 		catch (SOAPFaultException soapException) {
 			throw new Exception("Error from UkMail: (Outgoing messageId: "+ messageGuid.toString() +")" + soapException.getMessage());
